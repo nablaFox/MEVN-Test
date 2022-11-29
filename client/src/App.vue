@@ -26,8 +26,7 @@ function create() {
 <!-- global styles -->
 <style lang="scss">
 
-
-@import '~normalize.css/normalize.css';
+@import 'normalize.css/normalize.css';
 @import '@design';
 
 * {

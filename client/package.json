@@ -6,15 +6,19 @@
     "vue": "^3.2.41"
   },
   "scripts": {
-    "build": "webpack --progress --node-env production",
-    "watch": "webpack -w --node-env development --devtool=source-map"
+    "build": "webpack --progress --mode=production",
+    "dev": "vite"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
     "css-loader": "^6.7.2",
+    "css-minimizer-webpack-plugin": "^4.2.2",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
+    "vite": "^3.2.4",
+    "vite-plugin-ejs": "^1.6.4",
     "vue-loader": "^17.0.1",
     "vue-style-loader": "^4.1.3",
     "vue-template-compiler": "^2.7.14",

@@ -1,6 +1,5 @@
-const path = require('path')
+const aliases = require('./aliases.config')
 
-const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -15,15 +14,12 @@ const conf = {
     },
 
     plugins: [
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
-        }),
         new MiniCssExtractPlugin({ 
             filename: `styles/main.[contenthash].css`
         }),
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
         new VueLoaderPlugin()
     ],
 
@@ -75,12 +71,7 @@ const conf = {
             }
         ]
     },
-
-    resolve: {
-        alias: {
-            '@design': path.resolve('src/styles/index.scss')
-        }
-    }
+    resolve: { alias: aliases }
 }
 
 module.exports = conf
