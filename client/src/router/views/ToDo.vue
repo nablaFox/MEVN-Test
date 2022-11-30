@@ -2,18 +2,11 @@
 
 import { ref } from 'vue'
 
-import ToDoItem from './ToDoItem.vue'
+import ToDoItem from '@components/ToDoItem.vue'
 
 const title = ref('')
 const description = ref('')
 const status = ref('')
-
-
-function createTask() {
-
-
-
-}
 
 
 </script>
@@ -25,7 +18,7 @@ function createTask() {
 
         <h1 class="title"> ToDo List </h1>
 
-        <form @submit.prevent="createTask()">
+        <form @submit.prevent="$emit('createTask')">
             <div class="row">
                 <ToDoItem
                     id="input-one"

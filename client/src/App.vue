@@ -1,25 +1,13 @@
 <script setup>
 
-import ToDoForm from './components/ToDoForm.vue'
-//import Task from './components/Task.vue'
-
-
-function create() {
-   
-}
-
 </script>
-
-
-
 
 
 <template>
 
-   <header> MEVN Stack Example </header>
-
-   <ToDoForm @createTask="create()"/>
-
+   <component :is="this.$route.meta.layout || 'div'">
+      <router-view />
+   </component>
 
 </template>
 
@@ -35,14 +23,13 @@ function create() {
 
 #app { @extend %font-content }
 
+body {
+   background-color: #242424;
+   color: #e2e2e2;
+}
+
 header {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 100px;
-   font-size: 20px;
-   background-color: #1ccacd;
-   @extend %font-content;
+   @extend %font-heading;
 }
 
 h1 {
