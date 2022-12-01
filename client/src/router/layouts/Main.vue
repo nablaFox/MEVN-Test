@@ -13,14 +13,11 @@ import NavBar from '@components/NavBar.vue'
 
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 
 .main-layout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding-top: 15%;
 }
 
 </style>
