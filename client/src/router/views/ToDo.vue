@@ -1,13 +1,34 @@
 <script setup>
 
 import { ref } from 'vue'
+import { useTaskStore } from '@stores'
 
-import ToDoItem from '@components/ToDoItem.vue'
+import BaseInputText from '@components/BaseInputText.vue'
+import BaseButton from '@components/BaseButton.vue'
+import BaseSelect from '@components/BaseSelect.vue'
 
 const title = ref('')
 const description = ref('')
 const status = ref('')
 
+const taskForm = ref(null)
+
+const options = [
+    { label: 'To Be Done', value: 'To Be Done' },
+    { label: 'In Progress', value: 'In Progress' },
+    { label: 'Done', value: 'Done' }
+]
+
+function onSubmit() {
+    const taskStore = useTaskStore()
+    
+    taskStore.register(
+        title.value, 
+        description.value, 
+        status.value
+    )
+    .then(() => taskForm.value.reset())
+}
 
 </script>
 
@@ -17,33 +38,42 @@ const status = ref('')
     <div class="create-task">
 
         <h1 class="title"> ToDo List </h1>
-
-        <form @submit.prevent="$emit('createTask')">
+        <form
+            @submit.prevent="onSubmit"
+            ref="taskForm"
+        >
             <div class="row">
-                <ToDoItem
-                    id="input-one"
-                    label="Task"
-                    placeholder="Create a Task"
-                    v-model:text="title"
-                />
-                <ToDoItem
-                    id="input-two"
-                    label="Description" 
-                    placeholder="Description"
-                    v-model:text="description"
-                />
+                <div class="form-group">
+                    <label for="title"> Task </label>
+                    <BaseInputText
+                        id="title"
+                        placeholder="Enter task name"
+                        v-model:text="title"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="description"> Description </label>
+                    <BaseInputText
+                        id="description"
+                        placeholder="Description"
+                        v-model:text="description"
+                    />
+                </div>
             </div>
 
             <div class="row">
-                <ToDoItem
-                    id="select"
-                    select
-                    label="Status:"
-                    v-model:text="status"
-                />
+                <div class="form-group">
+                    <label for="status"> Status </label>
+                    <BaseSelect
+                        id="status"
+                        :options="options"
+                        v-model:selected="status"
+                        default="Done"
+                    />
+                </div>
             </div>
 
-            <input type="submit" value="Create">
+            <BaseButton type="submit"> Create </BaseButton>
 
         </form>
 
@@ -56,11 +86,9 @@ const status = ref('')
 
 <style lang="scss" scoped>
 
-
 .create-task {
     width: 80vw;
     margin: 0 auto;
-    margin-top: 50px;
 
     .row {
         display: grid;
@@ -69,18 +97,13 @@ const status = ref('')
         row-gap: 0;
     }
 
-    input[type=submit] {
-        background-color: #ff3f4d;
-        border-radius: 3px;
-        padding: 8px;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: .1s ease;
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
 
-        &:hover {
-            background-color: #cf323d;
-        }
+    .title {
+        margin-bottom: 20px;
     }
 
 }

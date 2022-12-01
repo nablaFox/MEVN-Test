@@ -6,7 +6,7 @@ const aliases = {
     '@views': 'src/router/views',
     '@layouts': 'src/router/layouts',
     '@router': 'src/router',
-    '@state': 'src/state',
+    '@stores': 'src/stores',
     '@design': 'src/styles/index.scss',
 }
 
